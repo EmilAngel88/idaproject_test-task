@@ -13,6 +13,6 @@ $ npm run dev
 $ npm run build
 $ npm run start
 
-
+# node version: v16.14.2
 
 
