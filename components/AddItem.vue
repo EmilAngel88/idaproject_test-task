@@ -67,7 +67,10 @@
           />
         </label>
         <button
-          :class="{ 'add-item__form_btn-disabled': !isAddButtonDisable }"
+          :class="{
+            'add-item__form_btn-disabled':
+              item.isItemAddedSuccessfully && isAddButtonDisable,
+          }"
           class="add-item__form_btn"
           type="submit"
         >
@@ -98,6 +101,25 @@ export default {
   },
   methods: {
     addItem() {
+      if (!this.item.name && !this.item.errors.name) {
+        this.item.errors.name = !this.item.errors.name;
+        setTimeout(() => {
+          this.item.errors.name = !this.item.errors.name;
+        }, 2000);
+      }
+      if (!this.item.imgLink && !this.item.errors.imgLink) {
+        this.item.errors.imgLink = !this.item.errors.imgLink;
+        setTimeout(() => {
+          this.item.errors.imgLink = !this.item.errors.imgLink;
+        }, 2000);
+      }
+      if (!this.item.price && !this.item.errors.price) {
+        this.item.errors.price = !this.item.errors.price;
+        setTimeout(() => {
+          this.item.errors.price = !this.item.errors.price;
+        }, 2000);
+      }
+
       if (this.item.name && this.item.imgLink && this.item.price) {
         const newItem = {
           id: Date.now(),
@@ -106,43 +128,27 @@ export default {
           imgLink: this.item.imgLink,
           price: this.item.price,
         };
+
         this.$store.commit("items/addItem", newItem);
-        this.item.name =
-          this.item.description =
-          this.item.imgLink =
-          this.item.price =
-            "";
+
         this.item.isItemAddedSuccessfully = !this.item.isItemAddedSuccessfully;
         setTimeout(() => {
           this.item.isItemAddedSuccessfully =
             !this.item.isItemAddedSuccessfully;
         }, 2000);
-      }
-      if (!this.item.name) {
-        this.item.errors.name = !this.item.errors.name;
-        setTimeout(() => {
-          this.item.errors.name = !this.item.errors.name;
-        }, 2000);
-      }
-      if (!this.item.imgLink) {
-        this.item.errors.imgLink = !this.item.errors.imgLink;
-        setTimeout(() => {
-          this.item.errors.imgLink = !this.item.errors.imgLink;
-        }, 2000);
-      }
-      if (!this.item.price) {
-        this.item.errors.price = !this.item.errors.price;
-        setTimeout(() => {
-          this.item.errors.price = !this.item.errors.price;
-        }, 2000);
+
+        this.item.name = "";
+        this.item.description = "";
+        this.item.imgLink = "";
+        this.item.price = "";
       }
     },
   },
   computed: {
     isAddButtonDisable() {
       return this.item.name && this.item.imgLink && this.item.price
-        ? true
-        : false;
+        ? false
+        : true;
     },
     btnText() {
       return this.item.isItemAddedSuccessfully

@@ -1,12 +1,9 @@
 <template>
   <div class="select">
-    <p
-      @click="select.areOptionsVisible = !select.areOptionsVisible"
-      class="select__title"
-    >
+    <p @click="select.isDropdown = !select.isDropdown" class="select__title">
       {{ select.selected }}
       <svg
-        :class="{ 'select-open': select.areOptionsVisible }"
+        :class="{ 'select-open': select.isDropdown }"
         width="8"
         height="6"
         viewBox="0 0 8 6"
@@ -20,7 +17,7 @@
       </svg>
     </p>
     <transition name="fade">
-      <div v-if="select.areOptionsVisible" class="select__options">
+      <div v-if="select.isDropdown" class="select__options">
         <p
           class="select__option"
           v-for="(option, i) in select.options"
@@ -58,7 +55,7 @@ export default {
           },
         ],
         selected: "По умолчанию",
-        areOptionsVisible: false,
+        isDropdown: false,
       },
     };
   },
@@ -66,7 +63,7 @@ export default {
     selectOption(option) {
       this.$emit("select", option);
       this.select.selected = option.name;
-      this.select.areOptionsVisible = false;
+      this.select.isDropdown = false;
     },
   },
 };
@@ -111,7 +108,7 @@ export default {
     background: #fffefb;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    z-index: 2;
+    z-index: 3;
   }
 
   &__option {

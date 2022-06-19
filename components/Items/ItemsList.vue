@@ -42,7 +42,9 @@ export default {
     deletItem(id) {
       if (!this.filterItems.length) {
         this.items = this.items.filter((el) => el.id !== id);
-        this.$store.commit("items/removeItem", id);
+        if (this.getItem.length) {
+          this.$store.commit("items/removeItem", id);
+        }
       } else {
         this.filterItems = this.filterItems.filter((el) => el.id !== id);
       }
@@ -67,7 +69,6 @@ export default {
           break;
         }
         case "3": {
-          console.log("3");
           this.filterItems = this.res.sort((a, b) => {
             return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 0;
           });

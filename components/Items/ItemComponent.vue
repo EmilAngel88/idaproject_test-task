@@ -4,10 +4,14 @@
     @mouseover="showDelButton = true"
     @mouseleave="showDelButton = false"
   >
-    <img :src="item.imgLink" alt="item_img" class="item__img" />
+    <div class="item__img">
+      <img :src="item.imgLink" alt="item_img" />
+    </div>
     <div class="item__info">
-      <p class="item__info_heading">{{ item.name }}</p>
-      <p class="item__info_description">{{ item.description }}</p>
+      <div class="item__info_head">
+        <p class="item__info_heading">{{ item.name }}</p>
+        <p class="item__info_description">{{ item.description }}</p>
+      </div>
       <div class="item__info_bottom">
         <p class="item__info_bottom-price">{{ numberWithSpaces }} &#x20bd;</p>
         <transition name="fade">
@@ -94,6 +98,7 @@ export default {
 .item {
   position: relative;
   max-width: 332px;
+  width: 100%;
   background: #fffefb;
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
     0px 6px 10px rgba(0, 0, 0, 0.02);
@@ -101,17 +106,27 @@ export default {
   cursor: pointer;
 
   &__img {
-    width: 100%;
     height: 200px;
-    object-fit: contain;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+      height: 100%;
+    }
   }
 
   &__info {
     padding: 16px 16px 24px;
 
+    &_head {
+      min-height: 100px;
+      margin-bottom: 32px;
+    }
+
     &_heading {
       @extend .card-text;
 
+      min-height: 50px;
       font-weight: 600;
       font-size: 20px;
       margin-bottom: 16px;
@@ -120,15 +135,16 @@ export default {
     &_description {
       @extend .card-text;
 
+      min-height: 80px;
       font-weight: 400;
       font-size: 16px;
-      margin-bottom: 32px;
     }
 
     &_bottom {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+      margin-top: auto;
 
       &-price {
         @extend .card-text;

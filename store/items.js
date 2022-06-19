@@ -27,5 +27,5 @@ export const getters = {
 	getItem: (state) => {
 		return state.items
 	},
-	getItemById: s => id => s.items.find(t => t.id === id)
+	getItemById: state => id => state.items.find(el => el.id === id)
 }
