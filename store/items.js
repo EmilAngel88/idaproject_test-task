@@ -27,5 +27,10 @@ export const getters = {
 	getItem: (state) => {
 		return state.items
 	},
-	getItemById: state => id => state.items.find(el => el.id === id)
+	getItemById: state => id => state.items.find(el => el.id === id),
+	getNewItemForFilteredItems: (state) => {
+		return state.items.reduce((acc, curr) =>
+			acc.id > curr.id ? acc : curr
+		);
+	}
 }

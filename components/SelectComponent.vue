@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     selectOption(option) {
-      this.$emit("select", option);
+      this.$emit("select", option.value);
       this.select.selected = option.name;
       this.select.isDropdown = false;
     },

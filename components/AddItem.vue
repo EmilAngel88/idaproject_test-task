@@ -141,6 +141,8 @@ export default {
         this.item.description = "";
         this.item.imgLink = "";
         this.item.price = "";
+
+        this.$emit('addNewItem')
       }
     },
   },

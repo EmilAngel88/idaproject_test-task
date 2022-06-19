@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <AddItem />
+    <AddItem  />
     <ItemsList />
   </div>
 </template>
@@ -14,5 +14,6 @@ export default {
 <style lang="scss" scoped>
 .main {
   display: flex;
+  gap: 16px;
 }
 </style>

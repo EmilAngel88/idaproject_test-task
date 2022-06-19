@@ -19,6 +19,9 @@ import { mapGetters } from "vuex";
 import ItemComponent from "@/components/Items/ItemComponent.vue";
 import items from "@/api/productList";
 export default {
+  components: {
+    ItemComponent,
+  },
   data() {
     return {
       items,
@@ -28,7 +31,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ getItem: "items/getItem" }),
+    ...mapGetters({ getItem: "items/getItem", getNewItemForFilteredItems: "items/getNewItemForFilteredItems" }),
     itemList() {
       if (!this.filterItems.length) {
         this.res = [...this.items, ...this.getItem];
@@ -40,17 +43,17 @@ export default {
   },
   methods: {
     deleteItem(id) {
-      if (!this.filterItems.length) {
-        this.items = this.items.filter((el) => el.id !== id);
-        if (this.getItem.length) {
-          this.$store.commit("items/removeItem", id);
-        }
-      } else {
-        this.filterItems = this.filterItems.filter((el) => el.id !== id);
+      this.res = this.res.filter((el) => el.id !== id);
+      if (this.getItem.length) {
+        this.$store.commit("items/removeItem", id);
       }
+      if (this.filterItems.length) {
+        console.log('работает удаление')
+        this.filterItems = this.filterItems.filter((el) => el.id !== id);
+      } 
     },
     select(option) {
-      this.selectSort = option.value;
+      this.selectSort = option;
       switch (this.selectSort) {
         case "0": {
           this.filterItems = [];
@@ -80,9 +83,14 @@ export default {
       }
     },
   },
-  components: {
-    ItemComponent,
-  },
+  watch: {
+    getItem() {
+      if (this.selectSort) {
+        this.filterItems.push(this.getNewItemForFilteredItems)
+        this.select(this.selectSort)
+      }
+    }
+  }
 };
 </script>
 

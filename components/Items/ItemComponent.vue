@@ -1,8 +1,8 @@
 <template>
   <div
     class="item"
-    @mouseover="showDelButton = true"
-    @mouseleave="showDelButton = false"
+    @mouseover="isShowDelButton = true"
+    @mouseleave="isShowDelButton = false"
   >
     <div class="item__img">
       <img :src="item.imgLink" alt="item_img" />
@@ -16,7 +16,7 @@
         <p class="item__info_bottom-price">{{ numberWithSpaces }} &#x20bd;</p>
         <transition name="fade">
           <nuxt-link
-            v-if="showDelButton"
+            v-if="isShowDelButton"
             :to="`item/${this.item.id}`"
             class="item__info_bottom-more"
           >
@@ -27,7 +27,7 @@
     </div>
     <transition name="fade">
       <div
-        v-if="showDelButton"
+        v-if="isShowDelButton"
         @click="$emit('deleteItem', item.id)"
         class="item__delet_item"
       >
@@ -77,7 +77,7 @@ export default {
   },
   data() {
     return {
-      showDelButton: false,
+      isShowDelButton: false,
     };
   },
   methods: {
