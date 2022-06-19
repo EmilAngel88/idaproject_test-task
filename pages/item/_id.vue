@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="item-page">
+    <div v-if="item" class="item-page">
       <div class="item-page__img">
         <img :src="item.imgLink" alt="product-img" />
       </div>
@@ -12,6 +12,11 @@
           <nuxt-link :to="'/'" class="item-page__back"> Назад </nuxt-link>
         </div>
       </div>
+    </div>
+    <div v-else class="error">
+      <p>Такого товара нет</p>
+
+      <nuxt-link :to="'/'">На главную</nuxt-link>
     </div>
   </div>
 </template>
@@ -114,6 +119,24 @@ export default {
         transform: scale(1);
       }
     }
+  }
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  font-size: 20px;
+
+  p {
+    @extend .card-text;
+  }
+
+  a {
+    @extend .item-page__back;
+
+    text-decoration: none;
   }
 }
 </style>
