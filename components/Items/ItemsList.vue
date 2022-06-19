@@ -5,7 +5,7 @@
     </div>
     <transition-group class="items-list__list" tag="div" name="list">
       <ItemComponent
-        @deletItem="deletItem($event)"
+        @deleteItem="deleteItem($event)"
         v-for="item in itemList"
         :key="item.id"
         :item="item"
@@ -39,7 +39,7 @@ export default {
     },
   },
   methods: {
-    deletItem(id) {
+    deleteItem(id) {
       if (!this.filterItems.length) {
         this.items = this.items.filter((el) => el.id !== id);
         if (this.getItem.length) {

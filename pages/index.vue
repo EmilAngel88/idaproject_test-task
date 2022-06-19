@@ -14,6 +14,5 @@ export default {
 <style lang="scss" scoped>
 .main {
   display: flex;
-  gap: 16px;
 }
 </style>

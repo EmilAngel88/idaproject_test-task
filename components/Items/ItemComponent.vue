@@ -28,7 +28,7 @@
     <transition name="fade">
       <div
         v-if="showDelButton"
-        @click="$emit('deletItem', item.id)"
+        @click="$emit('deleteItem', item.id)"
         class="item__delet_item"
       >
         <svg
