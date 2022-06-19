@@ -27,7 +27,7 @@ export default {
       items,
       res: [],
       selectSort: "",
-      filterItems: [],
+      filterItems: [], 
     };
   },
   computed: {
@@ -43,13 +43,13 @@ export default {
   },
   methods: {
     deleteItem(id) {
-      this.res = this.res.filter((el) => el.id !== id);
+      this.items = this.items.filter((el) => el.id !== id);
       if (this.getItem.length) {
         this.$store.commit("items/removeItem", id);
       }
       if (this.filterItems.length) {
-        console.log('работает удаление')
         this.filterItems = this.filterItems.filter((el) => el.id !== id);
+        this.res = this.res.filter((el) => el.id !== id);
       } 
     },
     select(option) {
@@ -91,6 +91,7 @@ export default {
       }
     }
   }
+  
 };
 </script>
 
